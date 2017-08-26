@@ -11,3 +11,6 @@ oviparous is a Python backended realtime frontend view framework.
 
 # Missing pieces...
 - WebRTC implementation for Python (as a peer)
+
+# Frontend
+- Polymer 2.0
