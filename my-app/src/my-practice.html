@@ -4,15 +4,28 @@
   <template>
     <style>
       :host {
-        color: yellow;
+        color: red;
+      }
+      iron-icon {
+        fill: rgba(0, 255, 0, 255);
+      }
+      :host([pressed]) iron-icon {
+        color: currentcolor;
       }
     </style>
-    <p>IS THIS YELLOW?</p>
+    <iron-icon icon="[[toggleIcon]]"></iron-icon>
   </template>
   <script>
     class MyPractice extends Polymer.Element {
       static get is() {
         return "my-practice";
+      }
+      static get properties() {
+        return {
+          toggleIcon: {
+            type: String
+          },
+        }
       }
       constructor() {
         super();

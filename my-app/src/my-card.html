@@ -37,7 +37,8 @@
       }
       iron-icon.star:last-of-type { color: var(--paper-grey-500); }
     </style>
-    <paper-card image="images/donuts.png">
+    <paper-card image="[[mySrc]]">
+    <!-- <paper-card image="images/donuts.png"> -->
       <div class="card-content">
         <div class="cafe-header">Cafe Basilico
           <div class="cafe-location cafe-light">
@@ -70,6 +71,16 @@
     // Your new element extends the Polymer.Element base class
     class MyCard extends Polymer.Element {
       static get is() { return 'my-card'; }
+      static get properties() {
+        return {
+          mySrc: {
+            type: String
+          },
+        }
+      }
+      constructor() {
+        super();
+      }
     }
     //Now, register your new custom element so the browser can use it
     customElements.define(MyCard.is, MyCard);
