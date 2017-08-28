@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <dom-module id="my-practice">
   <template>
     <style>
@@ -7,30 +8,52 @@
         color: red;
       }
       iron-icon {
-        fill: rgba(0, 255, 0, 255);
+        fill: rgba(0, 255, 255, 5);
       }
       :host([pressed]) iron-icon {
-        color: currentcolor;
+        fill: rgba(0, 255, 0, 6);
       }
     </style>
+    <!-- pass 'toggleIcon' to other element -->
     <iron-icon icon="[[toggleIcon]]"></iron-icon>
   </template>
   <script>
-    class MyPractice extends Polymer.Element {
+    class MyPractice extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() {
         return "my-practice";
       }
       static get properties() {
         return {
+          pressed: {
+            // this 'dom-module' has 'pressed' property which is 'Boolean'.
+            // 'reflectToAttribute' to DOM, also, 'notify' to DOM and JS.
+            // default 'value' is false
+            type: Boolean,
+            notify: true,
+            reflectToAttribute: true,
+            value: false
+          },
           toggleIcon: {
+            // this 'dom-module' has 'toggleIcon' property which is 'String'
+            // expecting like <my-practice toggle-icon='icon.png'></my-practice>
+            // if you want to pass to custom dom IN this dom,
+            // <iron-icon icon='[[toggleIcon]]'></iron-icon>
             type: String
           },
         }
       }
       constructor() {
+        // Inherits Polymer
         super();
+        this.addEventListener('tap', 'toggle');
+        // Initialize listener... '=>' indicates an anonymous function (ES6)
+        Polymer.Gestures.addListener(this, 'tap', () => this.toggle());
+      }
+      toggle() {
+        this.pressed = !this.pressed;
       }
     }
+    // Register this custom-element to the root
     customElements.define(MyPractice.is, MyPractice);
   </script>
 </dom-module>
