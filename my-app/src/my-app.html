@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -18,7 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <link rel="import" href="my-new-view.html">
 
@@ -28,27 +21,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
-
         display: block;
       }
-
       app-drawer-layout:not([narrow]) [drawer-toggle] {
         display: none;
       }
-
       app-header {
         color: #fff;
         background-color: var(--app-primary-color);
       }
-
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
-
       .drawer-list {
         margin: 0 20px;
       }
-
       .drawer-list a {
         display: block;
         padding: 0 16px;
@@ -56,7 +43,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--app-secondary-color);
         line-height: 40px;
       }
-
       .drawer-list a.iron-selected {
         color: black;
         font-weight: bold;
@@ -64,15 +50,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <app-drawer-layout fullbleed narrow="{{narrow}}">
-      <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" has-scrolling-region>
         <app-toolbar>Text</app-toolbar>
-        <h1>Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me Eat me </h1>
+        <iron-autogrow-textarea style="min-height: 350px; max-height: 350px; width: 250px"></iron-autogrow-textarea>
       </app-drawer>
-
-      <!-- Main content -->
       <app-header-layout has-scrolling-region>
-
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
