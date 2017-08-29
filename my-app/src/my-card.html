@@ -37,7 +37,7 @@
       }
       iron-icon.star:last-of-type { color: var(--paper-grey-500); }
     </style>
-    <paper-card image="[[mySrc]]">
+    <paper-card image="[[mySrc]]" elevation="[[myElevated]]">
     <!-- <paper-card image="images/donuts.png"> -->
       <div class="card-content">
         <div class="cafe-header">Cafe Basilico
@@ -69,17 +69,32 @@
   </template>
   <script>
     // Your new element extends the Polymer.Element base class
-    class MyCard extends Polymer.Element {
+    class MyCard extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() { return 'my-card'; }
       static get properties() {
         return {
           mySrc: {
             type: String
           },
+          myElevated: {
+            type: Number,
+            notify: true,
+            reflectToAttribute: true,
+            value: 0,
+          },
         }
       }
       constructor() {
         super();
+        this.addEventListener('tap', 'toggle');
+        Polymer.Gestures.addListener(this, 'tap', () => this.toggle());
+      }
+      toggle() {
+        if (this.myElevated == 0) {
+          this.myElevated = 5;
+        } else {
+          this.myElevated = 0;
+        }
       }
     }
     //Now, register your new custom element so the browser can use it
