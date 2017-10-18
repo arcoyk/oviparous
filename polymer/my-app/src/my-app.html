@@ -10,11 +10,12 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-request.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <link rel="import" href="my-new-view.html">
-
+ 
 <dom-module id="my-app">
   <template>
     <style>
@@ -53,6 +54,7 @@
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" has-scrolling-region>
         <app-toolbar>Text</app-toolbar>
         <iron-autogrow-textarea style="min-height: 350px; max-height: 350px; width: 250px"></iron-autogrow-textarea>
+        <iron-request id="xhr"></iron-request>
       </app-drawer>
       <app-header-layout has-scrolling-region>
         <app-header slot="header" condenses reveals effects="waterfall">
@@ -70,7 +72,6 @@
     class MyApp extends Polymer.Element {
       static get is() { return 'my-app'; }
     }
-
     window.customElements.define(MyApp.is, MyApp);
   </script>
 </dom-module>

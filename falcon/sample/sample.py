@@ -11,10 +11,12 @@ class Index:
     resp.status = falcon.HTTP_200
 
 class Article(object):
-  def on_get(self, req, resp, text):
+  def on_get(self, req, resp, option):
+    x = read_req(req)
     article = {
       'title': 'hello',
-      'result': f(text)
+      'option': option,
+      'result': x
     }
     resp.body = json.dumps(article, ensure_ascii=False)
     resp.status = falcon.HTTP_200
@@ -32,4 +34,4 @@ def read_req(req, default=0):
 
 api = falcon.API()
 api.add_route('/', Index())
-api.add_route('/article/{text}', Article())
+api.add_route('/article/{option}', Article())
