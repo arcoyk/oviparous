@@ -1,5 +1,4 @@
-!["icon.png"]("icon.png")
-![エビフライトライアングル](http://i.imgur.com/Jjwsc.jpg "サンプル")
+!["icon.png"]("./icon.png" "oviparous")
 
 # Heavy AI on backend, light UI on frontend.
 oviparous is a Python backended realtime frontend view framework. 
