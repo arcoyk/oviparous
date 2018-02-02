@@ -4,14 +4,36 @@ Near and far clipping plane ommit rendering too far or near objects.
 setSize() is responsible for resolution, too.
 requestAnimationFrame() instead of setInterval will stop rendering when in other tabs.
 npm help catching up with new versions and dependencies.
+FileLodear load file by XMLHttpRequest
+FileLoader is used in ImageLoader which is used in TextureLoader, CubeTextureLoader and ObjectLoader.
+You can accerate by shader and bufferGeometry, but it is shader coding...
+My Chrome capable of handling points 10k max.
 
+PerspectiveCamera: This projection mode is designed to mimic the way the human eye sees. 
+Scene: a space where you put 3D obeject (and light or camera).
 WebGL: js API for rendering 2D or 3D graphics without plug-ins.
 Same Origin Policy: permits data-access from a web page to another web page when these two are same origin.
 polygon mesh: is a collection of vertices, edges and faces.
 SkinnedMesh: A mesh that has a Skeleton with bones 
-Geometry: point, line or mesh with a coordinate.
+Geometry: a class to define shape of 3D object (cf. Material)
+Material: a class to define appearance of 3D object (cf. Geometry)
 Object3D: base class of 3d object in three.js
+Fog: a class to define linear alpha change.
+
+[GL]
+particle: large number of 3d objects that shares same splite (2D bitmap) or 3D model.
+texture: bitmap on surface
+
+[Java Script]
+Typed Array: buffer and view. buffer is data, view is context (type, stating point, length)
 
 [python http sever]
 python -m http.server
 
+
+
+[Hierarchy]
+Object3D
+  Scene
+Geometry
+Material
