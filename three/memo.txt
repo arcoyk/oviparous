@@ -1,0 +1,17 @@
+Three.js has different types of camera.
+Three.js use CPU instead of GPU when not available.
+Near and far clipping plane ommit rendering too far or near objects.
+setSize() is responsible for resolution, too.
+requestAnimationFrame() instead of setInterval will stop rendering when in other tabs.
+npm help catching up with new versions and dependencies.
+
+WebGL: js API for rendering 2D or 3D graphics without plug-ins.
+Same Origin Policy: permits data-access from a web page to another web page when these two are same origin.
+polygon mesh: is a collection of vertices, edges and faces.
+SkinnedMesh: A mesh that has a Skeleton with bones 
+Geometry: point, line or mesh with a coordinate.
+Object3D: base class of 3d object in three.js
+
+[python http sever]
+python -m http.server
+
