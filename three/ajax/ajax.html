@@ -1,0 +1,21 @@
+<html>
+<head>
+</head>
+<body>
+Ajax test
+<button onclick="my_ajax()"></button>
+<script src='js/libs/jquery.min.js'></script>
+<script>
+function my_ajax() {
+  $.ajax({
+    url: "http://localhost:7000",
+    context: document.body,
+    success: function(event) {
+      res = JSON.parse(event);
+      console.log(res.first);
+    }
+  })
+}
+</script>
+</body>
+</html>
