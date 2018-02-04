@@ -23,14 +23,21 @@ Fog: a class to define linear alpha change.
 [GL]
 particle: large number of 3d objects that shares same splite (2D bitmap) or 3D model.
 texture: bitmap on surface
+GLFW: light utility library for OpenGL (enables window-management, joystick, mouse input)
+OpenGL: API for 2D / 3D vector graphics, especially for interaction with a GPU
+vector graphics: graphics represented by attributed (e.g. color) vectors
+OpenGL ES: OpenGL for embeded systems
+Vulkan: low layer offering OpenGL (require memory allocation etc but high performance)
+GLSL: OpenGL Shading Language is a C like shading programming langage
+Shading: Originally point-wise hatching method to dipict depth. Generally post video processing.
+Hathing: A method to dipict depth by density of strokes
+Rendering: (3D rendering) generate camera-projected 2D image from 3D scene
 
 [Java Script]
 Typed Array: buffer and view. buffer is data, view is context (type, stating point, length)
 
 [python http sever]
 python -m http.server
-
-
 
 [Hierarchy]
 Object3D

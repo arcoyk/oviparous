@@ -63,14 +63,17 @@
         controls.addEventListener( 'change', renderer );
       }
 
-      function getDoc() {
+      function loadDoc( id ) {
         $.ajax({
-          url: "http://localhost:7000",
+          url: "http://localhost:7000/&id=" + id,
           context: document.body,
           success: function(event) {
             res = JSON.parse(event);
-            console.log(res);
             addDoc(res.text, res.x, res.y, res.z, res.h, res.s, res.l);
+            loader.count++;
+            if (loader.count >= res.limit) {
+              loader.complete = true;
+            }
           }
         })
       }
@@ -86,7 +89,15 @@
         }
       }
 
-      document.addEventListener( 'mousemove', getDoc, false );
+      function loadNext() {
+        if (!loader.complete) {
+          loadDoc(loader.nextId);
+          loader.nextId++;
+        }
+      }
+
+      var loader = {nextId: 0, complete: false, count: 0, loadNext: loadNext}
+      document.addEventListener( 'mousemove', loader.loadNext, false );
     </script>
   </body>
 </html>
