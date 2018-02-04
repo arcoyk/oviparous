@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="js/three.js"></script>
+    <script src="js/libs/tween.js"></script>
+    <script src="js/controls/TrackballControls.js"></script>
+    <script src="js/renderers/CSS3DRenderer.js"></script>
+    <script>
+      var camera, scene, renderer;
+      var controls;
+      init();
+      animate();
+
+      function card() {
+        var element = document.createElement( 'div' );
+        element.className = 'row';
+        element.innerHTML = '<div class="col s12 m5"><div class="card z-depth-0"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="http://materializecss.com/images/office.jpg"></div><div class="card-content"><span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span><p><a href="#">This is a link</a></p></div><div class="card-reveal"><span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span><p>Here is some more information about this product that is only revealed once clicked on.</p></div></div></div>'
+        var object = new THREE.CSS3DObject( element );
+        object.position.x = 100;
+        object.position.y = 0;
+        object.position.z = 0;
+        return object
+      }
+
+      function simpleCard() {
+        var element = document.createElement( 'div' );
+        element.className = 'row';
+        element.innerHTML = '<div class="col s12 m4"><div class="card-panel blue z-depth-0"><span class="white-text">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.</span></div></div>';
+        var object = new THREE.CSS3DObject( element );
+        object.position.x = 0;
+        object.position.y = 0;
+        object.position.z = 10;
+        return object
+      }
+
+      function init() {
+        // camera
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 2000;
+        // scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0x000000 );
+        scene.add( card() );
+        scene.add( simpleCard());
+        // renderer
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        document.body.appendChild( renderer.domElement );
+        // controls
+        controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', renderer );
+      }
+
+      function animate() {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+        controls.update();
+      }
+    </script>
+  </body>
+</html>
+
