@@ -30,14 +30,19 @@
       init();
       animate();
 
-      function addDoc(text, x, y, z, r, g, b) {
+      function addDoc(text, x, y, z, h, s, l) {
+        // Consider using PlaneGeometry for appearance
+        // In case of it, use object.add(css3dobject)
         var element = document.createElement( "div" );
         element.className = "element";
         element.textContent = text;
+        // element.style.backgroundColor = "hsl(" + h + "," + s + "%," + l + "%)";
+        console.log(s);
+        element.style.backgroundColor = "hsl(" + h + ", " + s + "%," + l + "%)";
         var object = new THREE.CSS3DObject( element );
-        object.position.x = x * 1000;
-        object.position.y = y * 1000;
-        object.position.z = z * 1000;
+        object.position.x = x * 100;
+        object.position.y = y * 100;
+        object.position.z = z * 100;
         scene.add(object);
       }
 
@@ -65,7 +70,7 @@
           success: function(event) {
             res = JSON.parse(event);
             console.log(res);
-            addDoc(res.text, res.x, res.y, res.z);
+            addDoc(res.text, res.x, res.y, res.z, res.h, res.s, res.l);
           }
         })
       }
