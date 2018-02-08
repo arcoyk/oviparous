@@ -19,9 +19,9 @@
       window.onload = function() {
         var camera, scene, renderer;
         var controls;
-        init();
-        animate();
-        function card(title) {
+        var SCALE = 500;
+
+        function card(title, x, y, z) {
           var element = document.createElement( 'div' );
           element.className = 'row';
           var bigCard = $('#big-card').clone();
@@ -30,9 +30,9 @@
           bigCard.hidden = false;
           element.innerHTML = bigCard.innerHTML;
           var object = new THREE.CSS3DObject( element );
-          object.position.x = 100;
-          object.position.y = 0;
-          object.position.z = 0;
+          object.position.x = x * SCALE;
+          object.position.y = y * SCALE;
+          object.position.z = z * SCALE;
           return object
         }
 
@@ -43,7 +43,6 @@
           // scene
           scene = new THREE.Scene();
           scene.background = new THREE.Color( 0x000000 );
-          scene.add( card("hogece") );
           // renderer
           renderer = new THREE.CSS3DRenderer();
           renderer.setSize( window.innerWidth, window.innerHeight );
@@ -54,14 +53,48 @@
           controls.addEventListener( 'change', renderer );
         }
 
+        function loadDoc( id ) {
+          $.ajax({
+            url: "http://localhost:7000/&id=" + id,
+            context: document.body,
+            success: function(event) {
+              var res = JSON.parse(event);
+              var c = card(res.text, res.x, res.y, res.z);
+              scene.add(c);
+              loader.count++;
+              if (loader.count >= res.limit) {
+                loader.complete = true;
+              }
+            }
+          })
+        }
+
+        function loadNext() {
+          if (!loader.complete) {
+            loadDoc(loader.nextId);
+            loader.nextId++;
+          }
+        }
+
         function animate() {
           requestAnimationFrame( animate );
           renderer.render( scene, camera );
-          controls.update();
+          try {
+            controls.update();
+          } catch ( e ) {
+            // solve error when you have time
+            // b[c].call is not a function : TrackballControls.js ERROR
+          }
         }
+
+        var loader = {nextId: 0, complete: false, count: 0, loadNext: loadNext}
+        document.addEventListener( 'mousemove', loader.loadNext, false );
+        init();
+        animate();
       }
+
     </script>
-<div hidden id='big-card' class="col s12 m5"><div class="card z-depth-0"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images/office.jpg"></div><div class="card-content"><span class="card-title activator grey-text text-darken-4"><span id="title">Card Title</span><i class="material-icons right">more_vert</i></span><p><a href="#">This is a link</a></p></div><div class="card-reveal"><span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span><p>Here is some more information about this product that is only revealed once clicked on.</p></div></div></div>
+<div hidden id='big-card' class="col s12 m5"><div class="card z-depth-0"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images/office_lo.jpg"></div><div class="card-content"><span class="card-title activator grey-text text-darken-4"><span id="title">Card Title</span><i class="material-icons right">more_vert</i></span><p><a href="#">This is a link</a></p></div><div class="card-reveal"><span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span><p>Here is some more information about this product that is only revealed once clicked on.</p></div></div></div>
   </body>
 </html>
 
