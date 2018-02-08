@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <style>
+    body {
+      background: black;
+    }
+    .element {
+      background: black;
+      border: 1px solid white;
+      color: white;
+      width: 100px;
+      height: 100px;
+      font-size: 20px;
+      font-family: Arial;
+    }
+    .element:hover {
+      border: 2px solid white;
+    }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.js"></script>
+    <script src="js/libs/tween.js"></script>
+    <script src='js/libs/jquery.min.js'></script>
+    <script src="js/controls/TrackballControls.js"></script>
+    <script src="js/renderers/CSS3DRenderer.js"></script>
+    <script>
+      var camera, scene, renderer;
+      var controls;
+      init();
+      animate();
+
+      function addDoc(text, x, y, z, h, s, l) {
+        // Consider using PlaneGeometry for appearance
+        // In case of it, use object.add(css3dobject)
+        var element = document.createElement( "div" );
+        element.className = "element";
+        element.textContent = text;
+        // element.style.backgroundColor = "hsl(" + h + "," + s + "%," + l + "%)";
+        console.log(s);
+        element.style.backgroundColor = "hsl(" + h + ", " + s + "%," + l + "%)";
+        var object = new THREE.CSS3DObject( element );
+        object.position.x = x * 100;
+        object.position.y = y * 100;
+        object.position.z = z * 100;
+        scene.add(object);
+      }
+
+      function init() {
+        // camera
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 300;
+        // scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0x000000 );
+        // renderer
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        document.body.appendChild( renderer.domElement );
+        // controls
+        controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', renderer );
+      }
+
+      function loadDoc( id ) {
+        $.ajax({
+          url: "http://localhost:7000/&id=" + id,
+          context: document.body,
+          success: function(event) {
+            res = JSON.parse(event);
+            addDoc(res.text, res.x, res.y, res.z, res.h, res.s, res.l);
+            loader.count++;
+            if (loader.count >= res.limit) {
+              loader.complete = true;
+            }
+          }
+        })
+      }
+
+      function animate() {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+        try {
+          controls.update();
+        } catch ( e ) {
+          // solve error when you have time
+          // b[c].call is not a function : TrackballControls.js ERROR
+        }
+      }
+
+      function loadNext() {
+        if (!loader.complete) {
+          loadDoc(loader.nextId);
+          loader.nextId++;
+        }
+      }
+
+      var loader = {nextId: 0, complete: false, count: 0, loadNext: loadNext}
+      document.addEventListener( 'mousemove', loader.loadNext, false );
+    </script>
+  </body>
+</html>
+
