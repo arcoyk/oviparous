@@ -21,14 +21,24 @@
         var controls;
         var SCALE = 500;
 
-        function card(title, x, y, z) {
+        function card(title, x, y, z, bigCard=false) {
           var element = document.createElement( 'div' );
           element.className = 'row';
-          var bigCard = $('#big-card').clone();
-          bigCard.find('#title').text(title);
-          bigCard = bigCard[0]
-          bigCard.hidden = false;
-          element.innerHTML = bigCard.innerHTML;
+          if (bigCard) {
+            var bigCard = $('#big-card').clone();
+            bigCard.find('#title').text(title);
+            bigCard = bigCard[0]
+            bigCard.hidden = false;
+            bigCard.id = undefined;
+            element.innerHTML = bigCard.innerHTML;
+          } else {
+            var smallCard = $('#small-card').clone();
+            smallCard.find('#white-text').text(title);
+            smallCard = smallCard[0]
+            smallCard.hidden = false;
+            smallCard.id = undefined;
+            element.innerHTML = smallCard.innerHTML;
+          }
           var object = new THREE.CSS3DObject( element );
           object.position.x = x * SCALE;
           object.position.y = y * SCALE;
@@ -94,7 +104,10 @@
       }
 
     </script>
-<div hidden id='big-card' class="col s12 m5"><div class="card z-depth-0"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images/office_lo.jpg"></div><div class="card-content"><span class="card-title activator grey-text text-darken-4"><span id="title">Card Title</span><i class="material-icons right">more_vert</i></span><p><a href="#">This is a link</a></p></div><div class="card-reveal"><span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span><p>Here is some more information about this product that is only revealed once clicked on.</p></div></div></div>
+<div hidden id='big-card' class="col s12 m5"><div class="card z-depth-0"><div class="card-image waves-effect waves-block waves-light"><img class="activator" src="images/office_low.jpg"></div><div class="card-content"><span class="card-title activator grey-text text-darken-4"><span id="title">Card Title</span><i class="material-icons right">more_vert</i></span><p><a href="#">This is a link</a></p></div><div class="card-reveal"><span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span><p>Here is some more information about this product that is only revealed once clicked on.</p></div></div></div>
+
+<div hidden id='small-card' class="col s12 m5"><div class="card-panel teal"><span class="white-text" id='white-text'>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.</span></div></div>
+
   </body>
 </html>
 
