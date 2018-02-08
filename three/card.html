@@ -21,7 +21,7 @@
         var controls;
         var SCALE = 500;
 
-        function card(title, x, y, z, bigCard=false) {
+        function card(title, x, y, z, h, s, l, bigCard=false) {
           var element = document.createElement( 'div' );
           element.className = 'row';
           if (bigCard) {
@@ -37,6 +37,7 @@
             smallCard = smallCard[0]
             smallCard.hidden = false;
             smallCard.id = undefined;
+            element.style.backgroundColor = "hsl(" + h + ", " + s + "%," + l + "%)";
             element.innerHTML = smallCard.innerHTML;
           }
           var object = new THREE.CSS3DObject( element );
@@ -69,7 +70,7 @@
             context: document.body,
             success: function(event) {
               var res = JSON.parse(event);
-              var c = card(res.text, res.x, res.y, res.z);
+              var c = card(res.text, res.x, res.y, res.z, res.h, res.s, res.l);
               scene.add(c);
               loader.count++;
               if (loader.count >= res.limit) {
