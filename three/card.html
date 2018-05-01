@@ -1,4 +1,6 @@
 <html>
+
+
   <head>
     <style>
     body {
@@ -19,7 +21,7 @@
       window.onload = function() {
         var camera, scene, renderer;
         var controls;
-        var SCALE = 200;
+        var SCALE = 500;
 
         function card(title, x, y, z, h, s, l, bigCard=false) {
           var element = document.createElement( 'div' );
@@ -45,7 +47,7 @@
           var object = new THREE.CSS3DObject( element );
           object.position.x = x * SCALE;
           object.position.y = y * SCALE;
-          object.position.z = z * SCALE / 50;
+          object.position.z = z * SCALE * 2;
           return object
         }
 
